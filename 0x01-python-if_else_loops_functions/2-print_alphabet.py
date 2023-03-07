@@ -1,4 +1,4 @@
 #!/usr/bin/python3
 # Print the ASCII alphabet in lowercase, not followed by a new line.
-for i in range(097, 122):
+for i in range(97, 122):
     print("{}".format(chr(i)), end=" ")
