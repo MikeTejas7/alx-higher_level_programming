@@ -2,7 +2,8 @@
 """script that prints the first State object from the database
 hbtn_0e_6_usa"""
 from sqlalchemy import (create_engine)
-from model_state import Base, State
+from relationship_state import Base, State
+from relationship_city import City
 from sqlalchemy.orm import sessionmaker
 import sys
 
@@ -14,8 +15,12 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    estados = session.query(State).filter(State.name.like('%a%'))
-    for sts in estados:
-        session.delete(sts)
+    estado = State()
+    estado.name = 'California'
+    ciudad = City()
+    ciudad.name = 'San Francisco'
+    estado.cities.append(ciudad)
+    session.add(estado)
+    session.add(ciudad)
     session.commit()
     session.close()
